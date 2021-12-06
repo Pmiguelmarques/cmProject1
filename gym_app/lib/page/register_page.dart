@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/widget/boxes.dart';
-import 'package:gym_app/model/client.dart';
+import 'package:gym_app/data/model/client.dart';
 
 enum ClientType {client, trainer}
 
@@ -203,8 +203,3 @@ Future addTransaction(String firstName, String lastName, String userName, String
 
 }
 
-/*..firstName = "second"
-  ..lastName = "secondLast"
-  ..userName = "test2"
-  ..password = "pass"
-  ..isTrainer = false;*/

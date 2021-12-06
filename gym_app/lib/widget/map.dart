@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:gym_app/model/event.dart';
+import 'package:gym_app/data/model/event.dart';
 import 'package:gym_app/widget/boxes.dart';
 
 class MapScreen extends StatefulWidget {

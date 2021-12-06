@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/page/create_event.dart';
 
-import 'package:gym_app/model/event.dart';
+import 'package:gym_app/data/model/event.dart';
 import 'package:gym_app/page/trainer_event_details.dart';
 import 'package:hive/hive.dart';
 import 'package:gym_app/widget/boxes.dart';

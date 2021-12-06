@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:gym_app/model/event.dart';
+import 'package:gym_app/data/model/event.dart';
 
 part 'client.g.dart';
 

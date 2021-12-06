@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/data/provider.dart';
 import 'package:gym_app/page/register_page.dart';
 import 'package:gym_app/page/trainer_main_page.dart';
 import 'package:gym_app/page/user_main_page.dart';
 import 'package:gym_app/widget/boxes.dart';
+import 'package:gym_app/data/repository.dart';
+import 'package:gym_app/data/repository.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   bool failedToLog = false;
   String username = "";
   String password = "";
+  Repository rep = Repository();
+
   void togglePassword() {
     setState(() {
       passwordVisible = !passwordVisible;
@@ -134,8 +139,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          
-          
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

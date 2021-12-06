@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gym_app/widget/boxes.dart';
-import 'package:gym_app/model/client.dart';
-import 'package:gym_app/widget/boxes.dart';
-import 'package:hive/hive.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/foundation.dart';
-
 import 'package:gym_app/widget/map.dart';
 import 'package:location/location.dart';
 

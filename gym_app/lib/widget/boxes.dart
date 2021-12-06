@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:gym_app/model/event.dart';
-import 'package:gym_app/model/client.dart';
+import 'package:gym_app/data/model/event.dart';
+import 'package:gym_app/data/model/client.dart';
 
 class Boxes {
   static Box<Event> getEvents() => Hive.box<Event>('event');
@@ -50,6 +50,4 @@ class Boxes {
       return defaultClient;
     }
   } 
-  //static void addEvent(String password, Event ?event) => Hive.box<Client>('client').get(password)!.events.add(event!);
-  //static List<Event> getClientEvents(String password) => Hive.box<Client>('client').get(password)!.events;
 }

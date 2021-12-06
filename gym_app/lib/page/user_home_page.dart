@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/page/user_event_details.dart';
 import 'package:gym_app/widget/boxes.dart';
-import 'package:gym_app/model/event.dart';
+import 'package:gym_app/data/model/event.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class UserHomePage extends StatefulWidget {
