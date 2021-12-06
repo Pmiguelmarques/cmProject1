@@ -23,10 +23,20 @@ class Repository {
     return result;
   }
 
+  Future<String> insertUser(String firstName, String lastName, String userName, String password, bool isTrainer) async {
+    String result = await DatabaseProvider.addUser(firstName, lastName, userName, password, isTrainer);
+    return result;
+  }
+
   Future<String> checkLogIn(String username, String password) async {
     final client = await DatabaseProvider.getClient(username);
     if(client['password'] == password){
-      return "success";
+      print(client['isTrainer']);
+      if(client['isTrainer']) {
+        return "successTrainer";
+      } else {
+        return "successUser";
+      }
     }
     return "failure"; 
   }

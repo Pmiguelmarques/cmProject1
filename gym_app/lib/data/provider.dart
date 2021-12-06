@@ -50,6 +50,15 @@ class DatabaseProvider {
     }
   }
 
+  static Future<String> addUser(String firstName, String lastName, String userName, String password, bool isTrainer) async {
+    try{
+      await clientCollection.insertOne({'firstName': firstName, 'lastName': lastName, 'userName': userName, 'password': password, 'isTrainer': isTrainer});
+      return 'Success';
+    }catch(e){
+      return 'Failed';
+    }
+  }
+
   static Future<List<Event>> fromJsonToEvent(List<Map<String, dynamic>> results) async {
     final eventList = <Event>[];
     for(var i = 0; i < results.length; i++){
