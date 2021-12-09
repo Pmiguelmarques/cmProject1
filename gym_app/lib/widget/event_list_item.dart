@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/page/user_event_details.dart';
 
 class EventListItem extends StatelessWidget {
-  const EventListItem({Key? key, required this.event}) : super(key: key);
+  const EventListItem({Key? key, required this.event, required this.username}) : super(key: key);
 
   final Event event;
+  final username; 
 
   @override 
   Widget build(BuildContext context){
@@ -19,9 +20,12 @@ class EventListItem extends StatelessWidget {
         )
       ),
       child: InkWell(
-      //onTap: (){
-      //  Navigator.of(context).push(MaterialPageRoute(
-      //      builder: (context) => UserEventDetails(eventIndex: event.name, userPassword: userPassword, fav: false)
+        onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => UserEventDetails(event: event.name, username: username)
+            )
+          );
+        },
         child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

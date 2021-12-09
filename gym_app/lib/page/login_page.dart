@@ -9,8 +9,8 @@ import 'package:gym_app/page/user_main_page.dart';
 import 'package:gym_app/widget/boxes.dart';
 import 'package:gym_app/data/repository.dart';
 import 'package:gym_app/data/repository.dart';
-import 'package:gym_app/widget/login_widgets.dart/login_button.dart';
-import 'package:gym_app/widget/login_widgets.dart/login_input.dart';
+import 'package:gym_app/widget/login_widgets/login_button.dart';
+import 'package:gym_app/widget/login_widgets/login_input.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -48,11 +48,11 @@ class _LoginPageState extends State<LoginPage> {
           }else if(state.status == LoginStatus.success){
             if(state.isTrainer){
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => TrainerMainPage(trainerPassword: state.password))
+                builder: (context) => TrainerMainPage(trainer: state.username))
               );
             }else{
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserMainPage(userPassword: state.password)
+                builder: (context) => UserMainPage(username: state.username)
               ));
             }
           }

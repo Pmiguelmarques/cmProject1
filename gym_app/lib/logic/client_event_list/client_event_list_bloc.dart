@@ -23,8 +23,8 @@ class ClientEventListBloc extends Bloc<ClientEventListEvent, ClientEventListStat
         ));
       }
       final newEvents = await _fetchEvents(state.events.length);
-      emit(newEvents.isEmpty 
-          ? state.copyWith(hasReachedMax: true)
+      emit(newEvents.length == state.events.length 
+          ? state.copyWith(hasReachedMax: true, status: ClientEventListStatus.success)
           : state.copyWith(
             status: ClientEventListStatus.success,
             events: newEvents,
@@ -36,7 +36,7 @@ class ClientEventListBloc extends Bloc<ClientEventListEvent, ClientEventListStat
   }
 
   Future<List<Event>> _fetchEvents([int startIndex = 0]) async {
-    final response = await repository.getAllEventsByName('MoveUA');
+    final response = await repository.getAllEvents();
     return response;
   }
   

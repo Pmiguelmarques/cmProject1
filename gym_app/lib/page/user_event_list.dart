@@ -18,22 +18,22 @@ class UserEventList extends StatefulWidget {
 
   const UserEventList({
     Key?key,
-    required this.userPassword
+    required this.username
   }) : super(key: key);
 
-  final userPassword;
+  final username;
 
   @override
-  UserEventListState createState() => UserEventListState(userPassword: userPassword);
+  UserEventListState createState() => UserEventListState(username: username);
 
 }
 
 class UserEventListState extends State<UserEventList> {
   final scrollController = ScrollController();
 
-  UserEventListState({required this.userPassword});
+  UserEventListState({required this.username});
   
-  final userPassword;
+  final username;
   
   @override 
   Widget build(BuildContext context) {
@@ -63,11 +63,9 @@ class UserEventListState extends State<UserEventList> {
                 itemBuilder: (BuildContext context, int index) {
                   return index >= state.events.length
                         ? const BottomLoader() 
-                        : EventListItem(event: state.events[index]);
+                        : EventListItem(event: state.events[index], username: username);
                 },
-                itemCount: state.hasReachedMax
-                          ? state.events.length
-                          : state.events.length + 1,
+                itemCount: state.events.length,
                 controller: scrollController,
               );
             default:
@@ -128,7 +126,7 @@ BlocBuilder<EventListBloc, EventListState>(builder: (context, state) {
 
         }
       })
-*/
+
 
 Widget buildContent(List<Event> events, String userPassword) {
   if(events.isEmpty){
@@ -170,7 +168,7 @@ Widget buildEvent(BuildContext context, Event event, int index, String userPassw
     child: InkWell(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => UserEventDetails(eventIndex: index, userPassword: userPassword, fav: false)
+            builder: (context) => UserEventDetails(eventIndex: index, userPassword: userPassword)
         ));
       },
       child: Row(
@@ -187,7 +185,7 @@ Widget buildEvent(BuildContext context, Event event, int index, String userPassw
   );
 }
 
-/*
+
 Card(
       color: Colors.white,
       child: InkWell(

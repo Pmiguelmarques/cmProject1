@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:gym_app/page/user_event_details.dart';
 import 'package:gym_app/widget/boxes.dart';
@@ -132,9 +130,9 @@ Widget buildEvent(BuildContext context, Event event, int index, String userPassw
         var temp = Boxes.getClient(userPassword).events[index].key;
         
         
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => UserEventDetails(eventIndex: temp, userPassword: userPassword, fav: true)
-        ));
+        //Navigator.of(context).push(MaterialPageRoute(
+         // builder: (context) => UserEventDetails(eventIndex: temp, userPassword: userPassword, fav: true)
+       // ));
       },
       child: Column(
         children: [

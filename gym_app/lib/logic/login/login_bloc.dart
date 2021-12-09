@@ -11,8 +11,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   final Repository repository;
-
-  void _onLoginEvent(LoginEvent event, Emitter<LoginState> emit) async {
+//alterei de loginevent para newloginevent
+  void _onLoginEvent(NewLoginEvent event, Emitter<LoginState> emit) async {
     emit(state.copyWith(status: LoginStatus.loginSent));
     try{
       String response = await repository.checkLogIn(state.username, state.password);

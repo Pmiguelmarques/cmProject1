@@ -5,19 +5,19 @@ import 'package:gym_app/page/user_event_list.dart';
 
 class UserMainPage extends StatefulWidget {
 
-  UserMainPage({Key?key, required this.userPassword}) : super(key: key);
+  UserMainPage({Key?key, required this.username}) : super(key: key);
 
-  final userPassword;
+  final username;
 
   @override 
-  UserMainPageState createState() => UserMainPageState(userPassword: userPassword);
+  UserMainPageState createState() => UserMainPageState(username: username);
 
 }
 
 class UserMainPageState extends State<UserMainPage> {
-  final userPassword;
+  final username;
   
-  UserMainPageState({required this.userPassword});
+  UserMainPageState({required this.username});
 
   PageController pageController = PageController(initialPage: 0);
   int selectedIndex = 0;
@@ -36,8 +36,8 @@ class UserMainPageState extends State<UserMainPage> {
             });
           },
           children: <Widget>[
-            UserHomePage(userPassword: userPassword),
-            UserEventList(userPassword: userPassword),
+            UserHomePage(userPassword: username),
+            UserEventList(username: username),
             UserMovement(),
           ]
         )

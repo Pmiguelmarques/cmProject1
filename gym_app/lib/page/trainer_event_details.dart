@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gym_app/logic/qr_check/qr_check_bloc.dart';
+import 'package:gym_app/logic/qr_check/qr_check_event.dart';
+import 'package:gym_app/logic/qr_check/qr_check_state.dart';
 import 'package:gym_app/widget/boxes.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
@@ -9,8 +13,10 @@ class TrainerEventDetails extends StatelessWidget {
 
   const TrainerEventDetails({
     Key?key,
+    required this.eventName
   }) : super(key: key);
 
+  final String eventName;
 
 
   @override 
@@ -33,7 +39,7 @@ class TrainerEventDetails extends StatelessWidget {
             style: ElevatedButton.styleFrom(primary: const Color.fromRGBO(39, 33, 33,1)),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const QRViewExample()
+                builder: (context) => QRViewExample(name: eventName)
               ));
             }, 
             child: const Text('Check participant QRcode', style: TextStyle(color: Color.fromRGBO(225, 100, 40,1)))
@@ -46,18 +52,22 @@ class TrainerEventDetails extends StatelessWidget {
 
 
 class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key}) : super(key: key);
+  const QRViewExample({Key? key, required this.name}) : super(key: key);
+
+  final String name;
   
   @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
+  State<StatefulWidget> createState() => _QRViewExampleState(name: name);
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
 
+  _QRViewExampleState({required this.name});
 
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final name;
 
 
   @override
@@ -71,27 +81,46 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return BlocProvider(
+      create: (context) => QrCheckBloc(),
+      child: BlocListener<QrCheckBloc, QrCheckState>(
+        listener: (context, state){
+          if(state.status == QrCheckStatus.success){
+            print('cota');
+          }else if(state.status ==QrCheckStatus.denied){
+            print('aiiiiee');
+          }
+        },
+        child: BlocBuilder<QrCheckBloc, QrCheckState>(
+          builder: (context, state){
+            if(result != null){
+              print(result.toString());
+              context.read<QrCheckBloc>().add(QrFound(result: result!.code));
+            }
+            return Scaffold(
+              body: Column(
                 children: <Widget>[
-                  if (result != null)
-                    Text(
-                        'Data: ${result!.code}')
-                  else
-                    const Text('Scan a code'),
+                  Expanded(flex: 4, child: _buildQrView(context)),
+                  Expanded(
+                    flex: 1,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          if (result != null)
+                            Text('${result!.code}')
+                          else
+                            const Text('Scan a code'),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
-            ),
-          )
-        ],
+            );
+          }
+        )
       ),
     );
   }

@@ -5,10 +5,10 @@ import 'package:gym_app/logic/register_user/register_user_bloc.dart';
 import 'package:gym_app/logic/register_user/register_user_state.dart';
 import 'package:gym_app/widget/boxes.dart';
 import 'package:gym_app/data/model/client.dart';
-import 'package:gym_app/widget/register_widgets.dart/register_user_button.dart';
-import 'package:gym_app/widget/register_widgets.dart/register_user_input.dart';
-import 'package:gym_app/widget/register_widgets.dart/register_user_is_trainer.dart';
-import 'package:gym_app/widget/register_widgets.dart/register_user_password.dart';
+import 'package:gym_app/widget/register_widgets/register_user_button.dart';
+import 'package:gym_app/widget/register_widgets/register_user_input.dart';
+import 'package:gym_app/widget/register_widgets/register_user_is_trainer.dart';
+import 'package:gym_app/widget/register_widgets/register_user_password.dart';
 
 enum ClientType {client, trainer}
 

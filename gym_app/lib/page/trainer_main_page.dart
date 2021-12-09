@@ -3,24 +3,27 @@ import 'package:gym_app/page/create_event.dart';
 
 import 'package:gym_app/data/model/event.dart';
 import 'package:gym_app/page/trainer_event_details.dart';
+import 'package:gym_app/widget/teacher_page/teacher_event_button.dart';
+import 'package:gym_app/widget/teacher_page/teacher_events.dart';
+import 'package:gym_app/widget/teacher_page/teacher_info.dart';
 import 'package:hive/hive.dart';
 import 'package:gym_app/widget/boxes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class TrainerMainPage extends StatefulWidget {
   
-  TrainerMainPage({Key?key, required this.trainerPassword}) : super(key : key);
+  TrainerMainPage({Key?key, required this.trainer}) : super(key : key);
 
-  final trainerPassword;
+  final trainer;
 
   @override 
-  TrainerMainPageState createState() => TrainerMainPageState(trainerPassword: trainerPassword);
+  TrainerMainPageState createState() => TrainerMainPageState(trainer: trainer);
 }
 
 class TrainerMainPageState extends State<TrainerMainPage> {
-  final trainerPassword;
+  final trainer;
 
-  TrainerMainPageState({required this.trainerPassword});
+  TrainerMainPageState({required this.trainer});
 
   @override 
   Widget build(BuildContext context) {
@@ -37,20 +40,13 @@ class TrainerMainPageState extends State<TrainerMainPage> {
         child: Column(
           children: [
             const SizedBox(height: 25),
-            Text(
-              "Welcome back ${Boxes.getClient(trainerPassword).firstName} ${Boxes.getClient(trainerPassword).lastName}",
-              style: const TextStyle(
-                color: Color.fromRGBO(225, 100, 40,1),
-                fontSize: 15,
-                fontWeight: FontWeight.bold
-              ),
-            ),
+            TeacherInfo(username: trainer),
             const SizedBox(height: 25,),
             Container(
               width: 400,
               height: 50,
               decoration: const BoxDecoration(
-                color: const Color.fromRGBO(39, 33, 33,1),
+                color: Color.fromRGBO(39, 33, 33,1),
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 child: const Center(
                   child: Text(
@@ -63,15 +59,21 @@ class TrainerMainPageState extends State<TrainerMainPage> {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 20.0),
               height: 200.0,
-              child: ValueListenableBuilder<Box<Event>>(
-                valueListenable: Boxes.getEvents().listenable(),
-                builder: (context, box, _) {
-                  final events = box.values.toList().cast<Event>();
-                  return buildContent(events);
-                }
-              ),
+              child: TeacherEvents(username: trainer),
             ),
-            SizedBox(
+            TeacherEventButton(username: trainer)
+          ],
+        ),
+      ),
+    );
+
+    
+  }
+}
+
+
+/*
+SizedBox(
               width: 200,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: const Color.fromRGBO(39, 33, 33,1)),
@@ -83,14 +85,7 @@ class TrainerMainPageState extends State<TrainerMainPage> {
                 child: const Text('Add Event', style: const TextStyle(color: Color.fromRGBO(225, 100, 40,1))),
               ),
             ),
-          ],
-        ),
-      ),
-    );
 
-    
-  }
-}
 
 Widget buildContent(List<Event> events) {
   if(events.isEmpty){
@@ -127,7 +122,7 @@ Widget buildEvent(BuildContext context, Event event, int index) {
     child: InkWell(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => TrainerEventDetails()
+          builder: (context) => TrainerEventDetails(eventName: )
         ));
       },
       child: Column(
@@ -145,4 +140,4 @@ Widget buildEvent(BuildContext context, Event event, int index) {
       ),
     )
   );
-}
+}*/
